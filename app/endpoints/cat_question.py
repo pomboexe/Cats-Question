@@ -16,8 +16,8 @@ def get_gato_por_id(id: int):
             'data_nascimento': data_nascimento.strftime('%Y-%m-%d')
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Internal Server Error")#alterei return para raise
-    
+        raise HTTPException(status_code=500, detail=str(e))#alterei return para raise e usei a exeception no detail transformando obj para string
+
 # Método que retorna a lista de gatos sem data de nascimento e sem idade
 @router.get("/gato")
 def get_gatos():
@@ -44,7 +44,7 @@ def get_gatos():
                 })
         return gatos_sem_data_nascimento
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Método que retorna uma lista de todos os gatos mais velhos com a mesma idade
 @router.get("/gatos-mais-velhos")#Alterando o metodo POST Para GET
@@ -71,7 +71,7 @@ def get_gatos_mais_velhos():
                 
         return gatos_mais_velhos
     except Exception as e:
-        return print(e) #raise  HTTPException(status_code=500, detail="Internal Server Error")#alterando return para raise
+        raise  HTTPException(status_code=500, detail=str(e))#alterando return para raise e usando a exeception no detalhe
 
 # Método que busca gatos por um termo de busca no nome
 @router.post("/buscar-gatos")
@@ -82,21 +82,25 @@ def buscar_gatos_por_nome(termo_busca: str = Body(...)):
         
         gatos_encontrados = []
         for gato_id, gato in dict_gatos.items():
-            if termo_busca.lower() in gato.nome.lower():
+            if termo_busca.lower() in gato.nome.lower(): 
                 
                 # Adiciona o gato encontrado ao resultado, excluindo o atributo idade
-                gatos_encontrados.append(gato)
-        
+                gatos_encontrados.append({ #ao inves de pegar o objeto Gato diretamente, pega apenas os atritubutos sem a idade
+                    "id": gato.id,
+                    "nome": gato.nome,
+                    "raca": gato.raca
+                })
+
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
-        return print(e)#raise HTTPException(status_code=200, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail=str(e))#alterando status de 200 para 500 e adicionando ao detail a exeception
 
 
 # Método que busca gatos por raça
-@router.get("/buscar-raca")
+@router.post("/buscar-raca")#alterando para o metodo post
 def buscar_gatos_por_raca(termo_busca: str = Body(...)):
     try:
         gatos_encontrados = [gato.__dict__ for gato in lista_gatos if gato.raca.lower() == termo_busca.lower()]
         return {'gatos_encontrados': gatos_encontrados}
     except Exception as e:
-        return HTTPException(status_code=500, detail="Internal Server Error")
+        raise HTTPException(status_code=500, detail=str(e)) #alterando para raise e usando a exeception no datail
