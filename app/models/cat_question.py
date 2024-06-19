@@ -13,16 +13,16 @@ lista_gatos = [
     Gato(2, "Felix", "Persa", 3),
     Gato(3, "Tom", "Maine Coon", 4),
     Gato(4, "Garfield", "Exótico", 5),
-    Gato(5, "Salem", "Bombay", "6"),
+    Gato(5, "Salem", "Bombay", 6),#idade estava como string sendo que é int
     Gato(6, "Luna", "Ragdoll", 1),
     Gato(7, "Simba", "Bengal", 2),
     Gato("5", "Oliver", "British Shorthair", 3),
     Gato(9, "Nala", "Siberiano", 4),
-    Gato(10, "Chloe", "Sphynx", 5),
+    Gato(10, "Chloe", "Sphynx", 5),       # >' not supported between instances of 'str' and 'int' captado ao retornar a execption
     Gato(11, "Bella", "Scottish Fold", 1),
     Gato(12, "Loki", "Abyssinian", 2),
     Gato(13, "Oscar", "Birman", 3),
-    Gato(14, "Tiger", "Savannah", "4"),
+    Gato(14, "Tiger", "Savannah", 4),#idade estava como string sendo que é int
     Gato(15, "Misty", "Norwegian Forest", 5),
     Gato(16, "Shadow", "Chartreux", 6),
     Gato(17, "Ginger", "Russian Blue", 2),
@@ -39,14 +39,14 @@ datas_nascimento = [
     {'id': 5, 'data_nascimento': datetime(2017, 1, 5)},
     {'id': 6, 'data_nascimento': datetime(2022, 6, 25)},
     {'id': 9, 'data_nascimento': datetime(2019, 3, 18)},
-    ('id: 31, data_nascimento: datetime(2018, 2, 9'),
+    {'id': 31, 'data_nascimento': datetime(2018, 2, 9)},#dados da estavam estrutrurados de maneira incorreta
     {'id': 10, 'data_nascimento': datetime(2018, 2, 11)},
     {'id': 11, 'data_nascimento': datetime(2022, 7, 3)},
     {'id': 12, 'data_nascimento': datetime(2021, 5, 28)},
-    {'id': 13, 'data_nascimento': datetime(2020, 4, 13)},
+    {'id': 13, 'data_nascimento': datetime(2020, 4, 13)}, #esses erros de estrutura do array causava uma execption 'string indices must be integers'
     {'id': 16, 'data_nascimento': datetime(2017, 1, 7)},
-    {'id': 17, 'data_nascimento': datetime(2021, 5, 2)},
-    ('id: 31', 'data_nascimento: datetime(2018, 2, 9'),
+    {'id': 17, 'data_nascimento': datetime(2021, 5, 2)}, 
+    {'id': 31, 'data_nascimento': datetime(2018, 2, 9)},#dados estavam estruturados de maneira incorreta
     {'id': 18, 'data_nascimento': datetime(2020, 4, 14)},
     {'id': 19, 'data_nascimento': datetime(2019, 3, 19)},
     {'id': 20, 'data_nascimento': datetime(2018, 2, 9)},
